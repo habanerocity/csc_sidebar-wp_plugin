@@ -45,6 +45,9 @@ if( !class_exists( 'CSC_Sidebar' ) ){
             require_once( CSC_SIDEBAR_PATH . 'post-types/class.csc-sidebar-cpt.php' );
             $CSCSidebarPostType = new CSC_Sidebar_Post_Type();
 
+            require_once( CSC_SIDEBAR_PATH . 'widgets/class.csc-sidebar-widget.php' );
+            $CSCSidebarWidget = new CSC_Sidebar_Widget();
+
         }
 
          /**
