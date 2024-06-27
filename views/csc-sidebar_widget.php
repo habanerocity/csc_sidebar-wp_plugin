@@ -6,22 +6,25 @@
 
     $post_author_id = get_post_field( 'post_author', get_the_ID() );
     $author_bio = get_the_author_meta( 'description', $post_author_id );
-
-    $author_id = get_the_author_meta('ID');
-    $args = array(
-        'author' => $author_id,
-        'post_type' => 'post',
-        'post_status' => 'publish',
-        'posts_per_page' => 3, 
-    );
-    $sidebar_posts = new WP_Query( $args );
+    $author_website = get_the_author_meta( 'user_url', $post_author_id );
+    
 ?>
 <div class="author-gravatar">
-    <img src="<?php echo esc_url( $avatar_data['url'] ); ?>" alt="<?php echo esc_attr( $author_name ); ?>" height="<?php echo esc_attr( $avatar_data['height'] ); ?>" width="<?php echo esc_attr( $avatar_data['width'] ); ?>">
-    <ul class="sidebar-social_media_icons">
-        <li><a href="https://www.facebook.com/profile.php?id=100091867068166" aria-label="Facebook"><i class="fab fa-facebook flex_container"></i></a></li>
-        <li><a href="https://www.instagram.com/thetastetripping?fbclid=IwAR0SRttIByun7s-hJ3oPZx9gUkjVpEesRFVjjoxIrvbDiwwefUwqdlZmb20" aria-label="Instagram"><i class="fab fa-instagram flex_container"></i></a></li>
-        <li><a href="https://www.tiktok.com/@taste.tripping" aria-label="TikTok"><i class="fab fa-tiktok flex_container"></i></a></li>
+    <img src="<?php if( $avatar_data['found_avatar'] ){echo esc_url( $avatar_data['url'] );} ?>" alt="<?php echo esc_attr( $author_name ); ?>" height="<?php echo esc_attr( $avatar_data['height'] ); ?>" width="<?php echo esc_attr( $avatar_data['width'] ); ?>">
+    <div class="author-metadata">
+        <h3 id="author-name"></h3>
+        <p id="occupation"></p>
+        <ul >
+            <li class="flex_container"><i class="fa fa-map-pin "></i><span id="location"></span></li>
+            <li class="flex_container">
+                <a class="flex_container" href="<?php echo $author_website; ?>" aria-label="Author's Website" target="blank">
+                    <span class="author-website"><?php echo $author_website; ?></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <ul id="social-media-icons" class="sidebar-social_media_icons">
+        <!-- Icons will be added here -->
     </ul>
 </div>
 <div class="csc_sidebar-about">
@@ -37,7 +40,16 @@
         <h3 class="wp-block-heading has-text-align-center">Latest Posts</h3>
     </div>
     <div id="featured_post_thumbnails-sidebar">
-        <?php 
+    <?php 
+
+    $author_id = get_the_author_meta('ID');
+    $args = array(
+        'author' => $author_id,
+        'post_type' => 'post',
+        'post_status' => 'publish',
+        'posts_per_page' => 3, 
+    );
+    $sidebar_posts = new WP_Query( $args );
         // Check if the author has any featured posts
         if( $sidebar_posts->have_posts() ):
             while( $sidebar_posts->have_posts() ) : $sidebar_posts->the_post();

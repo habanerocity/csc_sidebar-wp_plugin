@@ -80,9 +80,9 @@ class CSC_Sidebar_Widget extends WP_Widget{
 
         echo $args['before_widget'];
 
-       
         require( CSC_SIDEBAR_PATH . 'views/csc-sidebar_widget.php');
-        echo $args['after_widget'];
+
+        echo $args['after_widget'] ?? '';
 
     }
 
