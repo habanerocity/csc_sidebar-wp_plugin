@@ -4,7 +4,6 @@
     $avatar_data = get_avatar_data( $author_email, array( 'size' => 300 ) );
     $author_name = get_the_author_meta( 'display_name', $post_author_id );
 
-
     $author_bio = get_the_author_meta( 'description', $post_author_id );
     $author_website = get_the_author_meta( 'user_url', $post_author_id );
 
@@ -28,10 +27,15 @@
             $user_instagram_link_url = get_post_meta( get_the_ID(), 'csc_sidebar_user_instagram_link', true );
             $user_facebook_link_url = get_post_meta( get_the_ID(), 'csc_sidebar_user_facebook_link', true );
             $user_tiktok_link_url = get_post_meta( get_the_ID(), 'csc_sidebar_user_tiktok_link', true );
+            $user_linkedin_link_url = get_post_meta( get_the_ID(), 'csc_sidebar_user_linkedin_link', true );
+            $user_github_link_url = get_post_meta( get_the_ID(), 'csc_sidebar_user_github_link', true );
+            $user_website_link_url = get_post_meta( get_the_ID(), 'csc_sidebar_user_website_link', true );
+            $user_paypal_link_url = get_post_meta( get_the_ID(), 'csc_sidebar_user_paypal_link', true );
             
         ?>
 
 <div class="author-gravatar">
+
     <?php if( $image ): 
         if( has_post_thumbnail() ){
     ?>
@@ -52,11 +56,16 @@
             <li class="flex_container">
                 <i class="fa fa-map-pin "></i><span id="location">&nbsp;<?php echo esc_html( $user_location ) ?></span>
             </li>
+            <?php if( $user_website_link && ! empty( $user_website_link_url ) ): 
+            ?>
             <li class="flex_container">
-                <a class="flex_container" href="<?php echo esc_url( $author_website ); ?>" aria-label="Author's Website" target="blank">
-                    <span class="author-website"><?php echo esc_url( $author_website ); ?></span>
+                <a class="flex_container" href="<?php echo esc_url( $user_website_link_url ); ?>" aria-label="Author's Website" target="blank">
+                    <span class="author-website"><?php echo esc_url( $user_website_link_url ); ?></span>
                 </a>
             </li>
+            <?php 
+            endif;
+            ?> 
         </ul>
     </div>
     <ul id="social-media-icons" class="sidebar-social_media_icons">
@@ -89,12 +98,37 @@
         </li>
         <?php 
         endif; 
+
+        if( $user_linkedin_link && ! empty( $user_linkedin_link_url ) ): 
         ?>
          <li>
-            <a href="<?php echo esc_url( $user_tiktok_link_url ) ?>" target="_blank" aria-label="">
+            <a href="<?php echo esc_url( $user_linkedin_link_url ) ?>" target="_blank" aria-label="">
                 <i class="fab fa-linkedin"></i>
             </a>
         </li>
+        <?php 
+        endif; 
+
+        if( $user_github_link && ! empty( $user_github_link_url ) ): 
+        ?>
+        <li>
+            <a href="<?php echo esc_url( $user_github_link_url ) ?>" target="_blank" aria-label="">
+                <i class="fab fa-github"></i>
+            </a>
+        </li>
+        <?php 
+        endif; 
+
+        if( $user_paypal_link && ! empty( $user_paypal_link_url ) ): 
+        ?>
+        <li>
+            <a href="<?php echo esc_url( $user_paypal_link_url ) ?>" target="_blank" aria-label="">
+                <i class="fab fa-paypal"></i>
+            </a>
+        </li>
+        <?php 
+        endif;
+        ?>
     </ul>
 </div>
 <div class="csc_sidebar-about">

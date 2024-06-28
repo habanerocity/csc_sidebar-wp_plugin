@@ -25,11 +25,23 @@ class CSC_Sidebar_Widget extends WP_Widget{
         $title = isset( $instance['title'] ) ? $instance['title'] : '';
         // $number = 5;
         $image =  isset( $instance['image'] ) ? (bool) $instance['image'] : false;
+        $user_website_link =  isset( $instance['user_website_link'] )  ? (bool) $instance['user_website_link'] : false;
         $user_facebook_link =  isset( $instance['user_facebook_link'] )  ? (bool) $instance['user_facebook_link'] : false;
         $user_instagram_link =  isset( $instance['user_instagram_link'] )  ? (bool) $instance['user_instagram_link'] : false;
         $user_tiktok_link =  isset( $instance['user_tiktok_link'] )  ? (bool) $instance['user_tiktok_link'] : false;
-        var_dump( $image );
+        $user_linkedin_link =  isset( $instance['user_linkedin_link'] )  ? (bool) $instance['user_linkedin_link'] : false;
+        $user_github_link =  isset( $instance['user_github_link'] )  ? (bool) $instance['user_github_link'] : false;
+        $user_paypal_link =  isset( $instance['user_paypal_link'] )  ? (bool) $instance['user_paypal_link'] : false;
+
         ?>
+            <p>
+                <input type="checkbox" class="checkbox" 
+                id="<?php echo $this->get_field_id( 'user_website_link' ); ?>" 
+                name="<?php echo $this->get_field_name( 'user_website_link' ); ?>"
+                <?php checked( $user_website_link ) ?>>
+                <label for="<?php echo $this->get_field_id( 'user_website_link' ); ?>"><?php esc_html_e( 'Display users website link', 'csc-sidebar' ); ?></label>
+            </p>
+
             <p>
                 <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Title', 'csc-sidebar' ); ?>:</label>
                 <input type="text" class="widefat" 
@@ -39,7 +51,6 @@ class CSC_Sidebar_Widget extends WP_Widget{
             </p>
             
             <p>
-                <?php var_dump( $image ); ?>
                 <input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id( 'image' ); ?>" name="<?php echo $this->get_field_name( 'image' ); ?>" <?php checked( $image ); ?>>
                 <label for="<?php echo $this->get_field_id( 'image' ); ?>"><?php esc_html_e( 'Display user image?', 'csc-sidebar' ); ?></label>
             </p>
@@ -67,6 +78,30 @@ class CSC_Sidebar_Widget extends WP_Widget{
                 <?php checked( $user_tiktok_link ) ?>>
                 <label for="<?php echo $this->get_field_id( 'user_tiktok_link' ); ?>"><?php esc_html_e( 'Display user Tiktok link', 'csc-sidebar' ); ?></label>
             </p>
+
+            <p>
+                <input type="checkbox" class="checkbox" 
+                id="<?php echo $this->get_field_id( 'user_linkedin_link' ); ?>" 
+                name="<?php echo $this->get_field_name( 'user_linkedin_link' ); ?>"
+                <?php checked( $user_linkedin_link ) ?>>
+                <label for="<?php echo $this->get_field_id( 'user_linkedin_link' ); ?>"><?php esc_html_e( 'Display user LinkedIn link', 'csc-sidebar' ); ?></label>
+            </p>
+
+            <p>
+                <input type="checkbox" class="checkbox" 
+                id="<?php echo $this->get_field_id( 'user_github_link' ); ?>" 
+                name="<?php echo $this->get_field_name( 'user_github_link' ); ?>"
+                <?php checked( $user_github_link ) ?>>
+                <label for="<?php echo $this->get_field_id( 'user_github_link' ); ?>"><?php esc_html_e( 'Display user github link', 'csc-sidebar' ); ?></label>
+            </p>
+
+            <p>
+                <input type="checkbox" class="checkbox" 
+                id="<?php echo $this->get_field_id( 'user_paypal_link' ); ?>" 
+                name="<?php echo $this->get_field_name( 'user_paypal_link' ); ?>"
+                <?php checked( $user_paypal_link ) ?>>
+                <label for="<?php echo $this->get_field_id( 'user_paypal_link' ); ?>"><?php esc_html_e( 'Display user paypal link', 'csc-sidebar' ); ?></label>
+            </p>
         <?php
 
     }
@@ -76,9 +111,13 @@ class CSC_Sidebar_Widget extends WP_Widget{
         $title = ! empty( $instance['title'] ) ? $instance['title'] : $default_title;
 
         $image = isset( $instance['image'] ) ? $instance['image'] : false;
+        $user_website_link = isset( $instance['user_website_link'] ) ? $instance['user_website_link'] : false;
         $user_facebook_link = isset( $instance['user_facebook_link'] ) ? $instance['user_facebook_link'] : false;
         $user_instagram_link = isset( $instance['user_instagram_link'] ) ? $instance['user_instagram_link'] : false;
         $user_tiktok_link = isset( $instance['user_tiktok_link'] ) ? $instance['user_tiktok_link'] : false;
+        $user_linkedin_link = isset( $instance['user_linkedin_link'] ) ? $instance['user_linkedin_link'] : false;
+        $user_github_link = isset( $instance['user_github_link'] ) ? $instance['user_github_link'] : false;
+        $user_paypal_link = isset( $instance['user_paypal_link'] ) ? $instance['user_paypal_link'] : false;
 
         echo $args['before_widget'];
 
@@ -94,9 +133,13 @@ class CSC_Sidebar_Widget extends WP_Widget{
         $instance['title'] = sanitize_text_field( $new_instance['title'] );
 
         $instance['image'] = ! empty ( $new_instance['image'] ) ? 1 : 0;
+        $instance['user_website_link'] = ! empty ( $new_instance['user_website_link'] ) ? 1 : 0;
         $instance['user_facebook_link'] = ! empty ( $new_instance['user_facebook_link'] ) ? 1 : 0;
         $instance['user_instagram_link'] = ! empty ( $new_instance['user_instagram_link'] ) ? 1 : 0;
         $instance['user_tiktok_link'] = ! empty ( $new_instance['user_tiktok_link'] ) ? 1 : 0;
+        $instance['user_linkedin_link'] = ! empty ( $new_instance['user_linkedin_link'] ) ? 1 : 0;
+        $instance['user_github_link'] = ! empty ( $new_instance['user_github_link'] ) ? 1 : 0;
+        $instance['user_paypal_link'] = ! empty ( $new_instance['user_paypal_link'] ) ? 1 : 0;
 
         return $instance;
     }

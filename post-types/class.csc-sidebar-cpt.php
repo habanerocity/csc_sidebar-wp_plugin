@@ -78,6 +78,9 @@ if( !class_exists('CSC_Sidebar_Post_Type')){
                 $old_user_location = get_post_meta( $post_id, 'csc_sidebar_user_location', true );
                 $new_user_location = $_POST['csc_sidebar_user_location'];
 
+                $old_user_website = get_post_meta( $post_id, 'csc_sidebar_user_website_link', true );
+                $new_user_website = $_POST['csc_sidebar_user_website_link'];
+
                 $old_user_facebook_link = get_post_meta( $post_id, 'csc_sidebar_user_facebook_link', true );
                 $new_user_facebook_link = $_POST['csc_sidebar_user_facebook_link'];
 
@@ -87,11 +90,24 @@ if( !class_exists('CSC_Sidebar_Post_Type')){
                 $old_user_tiktok_link = get_post_meta( $post_id, 'csc_sidebar_user_tiktok_link', true );
                 $new_user_tiktok_link = $_POST['csc_sidebar_user_tiktok_link'];
 
+                $old_user_linkedin_link = get_post_meta( $post_id, 'csc_sidebar_user_linkedin_link', true );
+                $new_user_linkedin_link = $_POST['csc_sidebar_user_linkedin_link'];
+
+                $old_user_github_link = get_post_meta( $post_id, 'csc_sidebar_user_github_link', true );
+                $new_user_github_link = $_POST['csc_sidebar_user_github_link'];
+
+                $old_user_paypal_link = get_post_meta( $post_id, 'csc_sidebar_user_paypal_link', true );
+                $new_user_paypal_link = $_POST['csc_sidebar_user_paypal_link'];
+
                 update_post_meta( $post_id, 'csc_sidebar_user_occupation', sanitize_text_field( $new_user_occupation ) );
                 update_post_meta( $post_id, 'csc_sidebar_user_location', sanitize_text_field( $new_user_location ) );
+                update_post_meta( $post_id, 'csc_sidebar_user_website_link', sanitize_text_field( $new_user_website ) );
                 update_post_meta( $post_id, 'csc_sidebar_user_facebook_link', esc_url_raw( $new_user_facebook_link, $old_user_facebook_link ) );
                 update_post_meta( $post_id, 'csc_sidebar_user_instagram_link', esc_url_raw( $new_user_instagram_link, $old_user_instagram_link ) );
                 update_post_meta( $post_id, 'csc_sidebar_user_tiktok_link', esc_url_raw( $new_user_tiktok_link, $old_user_tiktok_link ) );
+                update_post_meta( $post_id, 'csc_sidebar_user_linkedin_link', esc_url_raw( $new_user_linkedin_link, $old_user_linkedin_link ) );
+                update_post_meta( $post_id, 'csc_sidebar_user_github_link', esc_url_raw( $new_user_github_link, $old_user_github_link ) );
+                update_post_meta( $post_id, 'csc_sidebar_user_paypal_link', esc_url_raw( $new_user_paypal_link, $old_user_paypal_link ) );
             }
         }
     }  
