@@ -36,7 +36,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if( !class_exists( 'CSC_Sidebar' ) ){
 
     class CSC_Sidebar{
-        public $author_email = '';
+        // public $author_email = '';
 
         public function __construct() {
 
@@ -63,25 +63,25 @@ if( !class_exists( 'CSC_Sidebar' ) ){
             define ( 'CSC_SIDEBAR_VERSION', '1.0.0' );     
         }
 
-        public function set_author_email() {
-            global $post;
-            $this->author_email = get_the_author_meta('user_email', $post->post_author);
-        }
+        // public function set_author_email() {
+        //     global $post;
+        //     $this->author_email = get_the_author_meta('user_email', $post->post_author);
+        // }
 
          /**
          * Enqueue scripts and pass PHP variables to JavaScript
          */
         public function enqueue_scripts() {
-            $this->set_author_email();
+            // $this->set_author_email();
 
-            wp_enqueue_script('social-icons-handler', CSC_SIDEBAR_URL . 'assets/social-icons-handler.js', array(), CSC_SIDEBAR_VERSION, true);
+            // wp_enqueue_script('social-icons-handler', CSC_SIDEBAR_URL . 'assets/social-icons-handler.js', array(), CSC_SIDEBAR_VERSION, true);
         
-            $author_email_hash = hash('sha256', $this->author_email); 
+            // $author_email_hash = hash('sha256', $this->author_email); 
         
             // Localize the script with your data
-            wp_localize_script('social-icons-handler', 'cscSidebarData', array(
-                'authorEmailHash' => $author_email_hash,
-            ));
+            // wp_localize_script('social-icons-handler', 'cscSidebarData', array(
+            //     'authorEmailHash' => $author_email_hash,
+            // ));
         }
 
 

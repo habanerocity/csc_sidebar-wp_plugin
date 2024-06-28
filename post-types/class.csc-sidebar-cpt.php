@@ -20,7 +20,7 @@ if( !class_exists('CSC_Sidebar_Post_Type')){
                         'singular_name' => esc_html__( 'Sidebar', 'csc-sidebar' ),
                     ),
                     'public'    => true,
-                    'supports'  => array( 'title', 'editor', 'thumbnail' ),
+                    'supports'  => array( 'title', 'author', 'editor', 'thumbnail' ),
                     'hierarchical'  => false,
                     'show_ui'   => true,
                     'show_in_menu'  => true,
@@ -72,6 +72,12 @@ if( !class_exists('CSC_Sidebar_Post_Type')){
             }
 
             if( isset( $_POST['action'] ) && $_POST['action'] === 'editpost' ){
+                $old_user_occupation = get_post_meta( $post_id, 'csc_sidebar_user_occupation', true );
+                $new_user_occupation = $_POST['csc_sidebar_user_occupation'];
+
+                $old_user_location = get_post_meta( $post_id, 'csc_sidebar_user_location', true );
+                $new_user_location = $_POST['csc_sidebar_user_location'];
+
                 $old_user_facebook_link = get_post_meta( $post_id, 'csc_sidebar_user_facebook_link', true );
                 $new_user_facebook_link = $_POST['csc_sidebar_user_facebook_link'];
 
@@ -81,6 +87,8 @@ if( !class_exists('CSC_Sidebar_Post_Type')){
                 $old_user_tiktok_link = get_post_meta( $post_id, 'csc_sidebar_user_tiktok_link', true );
                 $new_user_tiktok_link = $_POST['csc_sidebar_user_tiktok_link'];
 
+                update_post_meta( $post_id, 'csc_sidebar_user_occupation', sanitize_text_field( $new_user_occupation ) );
+                update_post_meta( $post_id, 'csc_sidebar_user_location', sanitize_text_field( $new_user_location ) );
                 update_post_meta( $post_id, 'csc_sidebar_user_facebook_link', esc_url_raw( $new_user_facebook_link, $old_user_facebook_link ) );
                 update_post_meta( $post_id, 'csc_sidebar_user_instagram_link', esc_url_raw( $new_user_instagram_link, $old_user_instagram_link ) );
                 update_post_meta( $post_id, 'csc_sidebar_user_tiktok_link', esc_url_raw( $new_user_tiktok_link, $old_user_tiktok_link ) );

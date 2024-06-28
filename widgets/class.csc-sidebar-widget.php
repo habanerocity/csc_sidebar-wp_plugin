@@ -28,6 +28,7 @@ class CSC_Sidebar_Widget extends WP_Widget{
         $user_facebook_link =  isset( $instance['user_facebook_link'] )  ? (bool) $instance['user_facebook_link'] : false;
         $user_instagram_link =  isset( $instance['user_instagram_link'] )  ? (bool) $instance['user_instagram_link'] : false;
         $user_tiktok_link =  isset( $instance['user_tiktok_link'] )  ? (bool) $instance['user_tiktok_link'] : false;
+        var_dump( $image );
         ?>
             <p>
                 <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Title', 'csc-sidebar' ); ?>:</label>
@@ -38,6 +39,7 @@ class CSC_Sidebar_Widget extends WP_Widget{
             </p>
             
             <p>
+                <?php var_dump( $image ); ?>
                 <input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id( 'image' ); ?>" name="<?php echo $this->get_field_name( 'image' ); ?>" <?php checked( $image ); ?>>
                 <label for="<?php echo $this->get_field_id( 'image' ); ?>"><?php esc_html_e( 'Display user image?', 'csc-sidebar' ); ?></label>
             </p>

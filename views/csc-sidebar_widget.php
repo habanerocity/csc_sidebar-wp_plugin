@@ -4,27 +4,97 @@
     $avatar_data = get_avatar_data( $author_email, array( 'size' => 300 ) );
     $author_name = get_the_author_meta( 'display_name', $post_author_id );
 
-    $post_author_id = get_post_field( 'post_author', get_the_ID() );
+
     $author_bio = get_the_author_meta( 'description', $post_author_id );
     $author_website = get_the_author_meta( 'user_url', $post_author_id );
-    
-?>
+
+    $author_id = get_the_author_meta('ID');
+
+    $csc_sidebar_args = array(
+        'author' => $author_id,
+        'post_type' => 'csc-sidebar',
+        'post_status' => 'publish',
+        'posts_per_page' => 1, 
+    );
+
+    $csc_sidebar_posts = new WP_Query( $csc_sidebar_args );
+        // Check if the author has any featured posts
+        if( $csc_sidebar_posts->have_posts() ):
+            while( $csc_sidebar_posts->have_posts() ) : $csc_sidebar_posts->the_post();
+
+            $user_occupation = get_post_meta( get_the_ID(), 'csc_sidebar_user_occupation', true );
+            $user_location = get_post_meta( get_the_ID(), 'csc_sidebar_user_location', true );
+
+            $user_instagram_link_url = get_post_meta( get_the_ID(), 'csc_sidebar_user_instagram_link', true );
+            $user_facebook_link_url = get_post_meta( get_the_ID(), 'csc_sidebar_user_facebook_link', true );
+            $user_tiktok_link_url = get_post_meta( get_the_ID(), 'csc_sidebar_user_tiktok_link', true );
+            
+        ?>
+
 <div class="author-gravatar">
-    <img src="<?php if( $avatar_data['found_avatar'] ){echo esc_url( $avatar_data['url'] );} ?>" alt="<?php echo esc_attr( $author_name ); ?>" height="<?php echo esc_attr( $avatar_data['height'] ); ?>" width="<?php echo esc_attr( $avatar_data['width'] ); ?>">
+    <?php if( $image ): 
+        if( has_post_thumbnail() ){
+    ?>
+    
+    <img 
+    src="<?php  echo esc_url( the_post_thumbnail_url()); ?>" 
+    alt="<?php echo esc_attr( $author_name ); ?>" 
+    height="<?php echo esc_attr( $avatar_data['height'] ); ?>" 
+    width="<?php echo esc_attr( $avatar_data['width'] ); ?>">
+    <?php 
+    }
+    endif; 
+    ?>
     <div class="author-metadata">
-        <h3 id="author-name"></h3>
-        <p id="occupation"></p>
+        <h3 id="author-name"><?php echo esc_html( get_the_title() ); ?></h3>
+        <p id="occupation"><?php echo esc_html( $user_occupation ); ?></p>
         <ul >
-            <li class="flex_container"><i class="fa fa-map-pin "></i><span id="location"></span></li>
             <li class="flex_container">
-                <a class="flex_container" href="<?php echo $author_website; ?>" aria-label="Author's Website" target="blank">
-                    <span class="author-website"><?php echo $author_website; ?></span>
+                <i class="fa fa-map-pin "></i><span id="location">&nbsp;<?php echo esc_html( $user_location ) ?></span>
+            </li>
+            <li class="flex_container">
+                <a class="flex_container" href="<?php echo esc_url( $author_website ); ?>" aria-label="Author's Website" target="blank">
+                    <span class="author-website"><?php echo esc_url( $author_website ); ?></span>
                 </a>
             </li>
         </ul>
     </div>
     <ul id="social-media-icons" class="sidebar-social_media_icons">
-        <!-- Icons will be added here -->
+        <?php if( $user_facebook_link && ! empty( $user_facebook_link_url ) ): 
+        ?>
+        <li>
+            <a href="<?php echo esc_url( $user_facebook_link_url ) ?>" target="_blank" aria-label="">
+                <i class="fab fa-facebook"></i>
+            </a>
+        </li>
+        <?php 
+        endif; 
+        
+        if( $user_instagram_link && ! empty( $user_instagram_link_url ) ): 
+        ?>
+        <li>
+            <a href="<?php echo esc_url( $user_instagram_link_url ) ?>" target="_blank" aria-label="">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </li>
+        <?php 
+        endif; 
+        
+        if( $user_tiktok_link && ! empty( $user_tiktok_link_url ) ): 
+        ?>
+        <li>
+            <a href="<?php echo esc_url( $user_tiktok_link_url ) ?>" target="_blank" aria-label="">
+                <i class="fab fa-tiktok"></i>
+            </a>
+        </li>
+        <?php 
+        endif; 
+        ?>
+         <li>
+            <a href="<?php echo esc_url( $user_tiktok_link_url ) ?>" target="_blank" aria-label="">
+                <i class="fab fa-linkedin"></i>
+            </a>
+        </li>
     </ul>
 </div>
 <div class="csc_sidebar-about">
@@ -35,6 +105,12 @@
         <?php echo esc_html( $author_bio ); ?>
     </div>
 </div>
+<?php
+    endwhile;
+    endif; 
+    wp_reset_postdata(); // reset the query
+    
+?>
 <div class="csc_sidebar-latest_posts">
     <div class="csc_sidebar-heading">
         <h3 class="wp-block-heading has-text-align-center">Latest Posts</h3>
