@@ -32,6 +32,7 @@
             $user_website_link_url = get_post_meta( get_the_ID(), 'csc_sidebar_user_website_link', true );
             $user_paypal_link_url = get_post_meta( get_the_ID(), 'csc_sidebar_user_paypal_link', true );
 
+            var_dump($display_post_archive);
         ?>
 
 <div class="author-gravatar">
@@ -156,8 +157,8 @@
     endif; 
     wp_reset_postdata(); // reset the query
     
-?>
-<?php if( $display_latest_posts ): ?>
+ if( $display_latest_posts ): 
+ ?>
 <div class="csc_sidebar-latest_posts">
     <div class="csc_sidebar-heading">
         <h3 class="wp-block-heading has-text-align-center">Latest Posts</h3>
@@ -203,8 +204,9 @@
         ?>
     </div>
 </div>
-<?php endif; ?>
-<?php if( $display_post_categories ): ?>
+<?php endif; 
+if( $display_post_categories ): 
+?>
 <div class="csc_sidebar-categories">
     <div class="csc_sidebar-heading">
         <h3 class="wp-block-heading has-text-align-center" id="dropdown_label-categories">Categories</h3>
@@ -238,7 +240,10 @@
         });
     </script>
 </div>
-<?php endif; ?>
+<?php endif; 
+
+if( $display_post_archive ):
+?>
 <div class="csc_sidebar-categories">
     <div class="csc_sidebar-heading">
         <h3 class="wp-block-heading has-text-align-center" id="dropdown_label-archive">Archive</h3>
@@ -275,3 +280,4 @@
     ?>
     </div>
 </div>
+<?php endif; ?>

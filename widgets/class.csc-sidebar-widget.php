@@ -40,6 +40,8 @@ class CSC_Sidebar_Widget extends WP_Widget{
 
         $display_post_categories = isset( $instance['display_post_categories'] ) ? (bool) $instance['display_post_categories'] : false;
 
+        $display_post_archive = isset( $instance['display_post_archive'] ) ? (bool) $instance['display_post_archive'] : false;
+
         ?>
             
             <p>
@@ -149,6 +151,14 @@ class CSC_Sidebar_Widget extends WP_Widget{
                 <?php checked( $display_post_categories ) ?>>
                 <label for="<?php echo $this->get_field_id( 'display_post_categories' ); ?>"><?php esc_html_e( 'Display post categories', 'csc-sidebar' ); ?></label>
             </p>
+
+            <p>
+                <input type="checkbox" class="checkbox" 
+                id="<?php echo $this->get_field_id( 'display_post_archive' ); ?>" 
+                name="<?php echo $this->get_field_name( 'display_post_archive' ); ?>"
+                <?php checked( $display_post_archive ) ?>>
+                <label for="<?php echo $this->get_field_id( 'display_post_archive' ); ?>"><?php esc_html_e( 'Display post archive', 'csc-sidebar' ); ?></label>
+            </p>
         <?php
 
     }
@@ -172,6 +182,7 @@ class CSC_Sidebar_Widget extends WP_Widget{
         $latest_posts_number = isset( $instance['latest_posts_number'] ) ? $instance['latest_posts_number'] : 3;
 
         $display_post_categories = isset( $instance['display_post_categories'] ) ? $instance['display_post_categories'] : false;
+        $display_post_archive = isset( $instance['display_post_archive'] ) ? $instance['display_post_archive'] : false;
 
         echo $args['before_widget'];
 
@@ -201,6 +212,7 @@ class CSC_Sidebar_Widget extends WP_Widget{
         $instance['latest_posts_number'] = (int) $new_instance['latest_posts_number'];
 
         $instance['display_post_categories'] = ! empty ( $new_instance['display_post_categories'] ) ? 1 : 0;
+        $instance['display_post_archive'] = ! empty ( $new_instance['display_post_archive'] ) ? 1 : 0;
 
         return $instance;
     }
