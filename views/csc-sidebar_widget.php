@@ -21,7 +21,7 @@
         if( $csc_sidebar_posts->have_posts() ):
             while( $csc_sidebar_posts->have_posts() ) : $csc_sidebar_posts->the_post();
 
-            $user_occupation = get_post_meta( get_the_ID(), 'csc_sidebar_user_occupation', true );
+            $user_occupation_title = get_post_meta( get_the_ID(), 'csc_sidebar_user_occupation', true );
             $user_location = get_post_meta( get_the_ID(), 'csc_sidebar_user_location', true );
 
             $user_instagram_link_url = get_post_meta( get_the_ID(), 'csc_sidebar_user_instagram_link', true );
@@ -31,7 +31,7 @@
             $user_github_link_url = get_post_meta( get_the_ID(), 'csc_sidebar_user_github_link', true );
             $user_website_link_url = get_post_meta( get_the_ID(), 'csc_sidebar_user_website_link', true );
             $user_paypal_link_url = get_post_meta( get_the_ID(), 'csc_sidebar_user_paypal_link', true );
-            
+
         ?>
 
 <div class="author-gravatar">
@@ -50,8 +50,17 @@
     endif; 
     ?>
     <div class="author-metadata">
-        <h3 id="author-name"><?php echo esc_html( get_the_title() ); ?></h3>
-        <p id="occupation"><?php echo esc_html( $user_occupation ); ?></p>
+        <?php if( $user_author_name && ! empty (get_the_title())  ): ?>
+        <h3 id="author-name"><?php the_title(); ?></h3>
+        <?php 
+        endif;
+
+        if( $user_occupation && ! empty( $user_occupation_title ) ):
+        ?>
+        <p id="occupation"><?php echo esc_html( $user_occupation_title ); ?></p>
+        <?php
+        endif;
+        ?>
         <ul >
             <li class="flex_container">
                 <i class="fa fa-map-pin "></i><span id="location">&nbsp;<?php echo esc_html( $user_location ) ?></span>
@@ -131,20 +140,24 @@
         ?>
     </ul>
 </div>
+<?php if($user_author_bio && ! empty( get_the_content() )): ?>
 <div class="csc_sidebar-about">
     <div class="csc_sidebar-heading">
         <h3 class="wp-block-heading has-text-align-center" id="about__me-heading">About Me</h3>
     </div>
     <div class="author-bio">
-        <?php echo esc_html( $author_bio ); ?>
+        <?php the_content(); ?>
     </div>
 </div>
-<?php
+<?php 
+    endif;
+
     endwhile;
     endif; 
     wp_reset_postdata(); // reset the query
     
 ?>
+<?php if( $display_latest_posts ): ?>
 <div class="csc_sidebar-latest_posts">
     <div class="csc_sidebar-heading">
         <h3 class="wp-block-heading has-text-align-center">Latest Posts</h3>
@@ -153,11 +166,14 @@
     <?php 
 
     $author_id = get_the_author_meta('ID');
+
+    $latest_posts_number = ($latest_posts_number > 0 && $latest_posts_number <= 7) ? $latest_posts_number : 3;
+
     $args = array(
         'author' => $author_id,
         'post_type' => 'post',
         'post_status' => 'publish',
-        'posts_per_page' => 3, 
+        'posts_per_page' => absint($latest_posts_number), 
     );
     $sidebar_posts = new WP_Query( $args );
         // Check if the author has any featured posts
@@ -181,12 +197,14 @@
         wp_reset_postdata(); // reset the query
         else:
         ?>
-            <p>No featured posts found for this author.</p>
+            <p>No latest posts found for this author.</p>
         <?php
             endif;
         ?>
     </div>
 </div>
+<?php endif; ?>
+<?php if( $display_post_categories ): ?>
 <div class="csc_sidebar-categories">
     <div class="csc_sidebar-heading">
         <h3 class="wp-block-heading has-text-align-center" id="dropdown_label-categories">Categories</h3>
@@ -220,6 +238,7 @@
         });
     </script>
 </div>
+<?php endif; ?>
 <div class="csc_sidebar-categories">
     <div class="csc_sidebar-heading">
         <h3 class="wp-block-heading has-text-align-center" id="dropdown_label-archive">Archive</h3>
