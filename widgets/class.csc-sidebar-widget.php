@@ -22,7 +22,7 @@ class CSC_Sidebar_Widget extends WP_Widget{
     }
 
     public function form( $instance ){
-        $title = isset( $instance['title'] ) ? $instance['title'] : '';
+
         $user_author_name = isset( $instance['user_author_name'] ) ? $instance['user_author_name'] : '';
         $user_author_bio = isset( $instance['user_author_bio'] ) ? (bool) $instance['user_author_bio'] : '';
         $image =  isset( $instance['image'] ) ? (bool) $instance['image'] : false;
@@ -43,14 +43,7 @@ class CSC_Sidebar_Widget extends WP_Widget{
         $display_post_archive = isset( $instance['display_post_archive'] ) ? (bool) $instance['display_post_archive'] : false;
 
         ?>
-            
-            <p>
-                <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Title', 'csc-sidebar' ); ?>:</label>
-                <input type="text" class="widefat" 
-                id="<?php echo $this->get_field_id( 'title' ); ?>" 
-                name="<?php echo $this->get_field_name( 'title' ); ?>" 
-                value="<?php echo esc_attr( $title ); ?>">
-            </p>
+            <h4>About the author</h4>
 
             <p>
                 <input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id( 'user_author_name' ); ?>" name="<?php echo $this->get_field_name( 'user_author_name' ); ?>" <?php checked( $user_author_name ); ?>>
@@ -66,6 +59,8 @@ class CSC_Sidebar_Widget extends WP_Widget{
                 <input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id( 'image' ); ?>" name="<?php echo $this->get_field_name( 'image' ); ?>" <?php checked( $image ); ?>>
                 <label for="<?php echo $this->get_field_id( 'image' ); ?>"><?php esc_html_e( 'Display user image', 'csc-sidebar' ); ?></label>
             </p>
+
+            <h4>Author's social media links</h4>
 
             <p>
                 <input type="checkbox" class="checkbox" 
@@ -131,6 +126,8 @@ class CSC_Sidebar_Widget extends WP_Widget{
                 <label for="<?php echo $this->get_field_id( 'user_paypal_link' ); ?>"><?php esc_html_e( 'Display user paypal link', 'csc-sidebar' ); ?></label>
             </p>
 
+            <h4>Author's latest posts</h4>
+
             <p>
                 <input type="checkbox" class="checkbox" 
                 id="<?php echo $this->get_field_id( 'display_latest_posts' ); ?>" 
@@ -143,6 +140,8 @@ class CSC_Sidebar_Widget extends WP_Widget{
                 <label for="<?php echo $this->get_field_id( 'latest_posts_number' ); ?>"><?php esc_html_e( 'Latest number of posts to show', 'csc-sidebar' ); ?>:</label>
                 <input type="latest_posts_number" class="tiny-text" id="<?php echo $this->get_field_id( 'latest_posts_number' ); ?>" name="<?php echo $this->get_field_name( 'latest_posts_number' ); ?>" step="1" min="1" size="3" value="<?php echo esc_attr( $latest_posts_number ); ?>">
             </p>
+
+            <h4>Archive</h4>
 
             <p>
                 <input type="checkbox" class="checkbox" 
@@ -165,7 +164,6 @@ class CSC_Sidebar_Widget extends WP_Widget{
 
     public function widget( $args, $instance ){
         $default_title = 'CSC Sidebar';
-        $title = ! empty( $instance['title'] ) ? $instance['title'] : $default_title;
         $user_author_name = ! empty( $instance['user_author_name'] ) ? $instance['user_author_name'] : false;
         $user_author_bio = ! empty( $instance['user_author_bio'] ) ? $instance['user_author_bio'] : false;
         $image = isset( $instance['image'] ) ? $instance['image'] : false;
@@ -195,7 +193,6 @@ class CSC_Sidebar_Widget extends WP_Widget{
     public function update( $new_instance, $old_instance ){
         $instance = $old_instance;
 
-        $instance['title'] = sanitize_text_field( $new_instance['title'] );
         $instance['user_author_name'] = ! empty ( $new_instance['user_author_name'] ) ? 1 : 0;
         $instance['user_author_bio'] = ! empty ( $new_instance['user_author_bio'] ) ? 1 : 0;
         $instance['image'] = ! empty ( $new_instance['image'] ) ? 1 : 0;
