@@ -47,11 +47,6 @@ if( !class_exists( 'CSC_Sidebar' ) ){
 
             require_once( CSC_SIDEBAR_PATH . 'widgets/class.csc-sidebar-widget.php' );
             $CSCSidebarWidget = new CSC_Sidebar_Widget();
-
-            if( is_active_widget( false, false, $this->id_base ) );
-
-            // add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
-
         }
 
          /**
@@ -83,7 +78,19 @@ if( !class_exists( 'CSC_Sidebar' ) ){
          * Uninstall the plugin
          */
         public static function uninstall(){
+            delete_option('widge_csc-sidebar');
 
+            $posts = get_posts(
+                array(
+                    'post_type' => 'csc-sidebar',
+                    'number_posts' => -1,
+                    'post_status' => 'any',
+                )
+            );
+
+            foreach( $posts as $post ){
+                wp_delete_post( $post->ID, true);
+            }
         }
 
     }
