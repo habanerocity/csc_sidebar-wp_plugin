@@ -78,7 +78,7 @@ if( !class_exists( 'CSC_Sidebar' ) ){
          * Uninstall the plugin
          */
         public static function uninstall(){
-            delete_option('widge_csc-sidebar');
+            delete_option('widget_csc-sidebar');
 
             $posts = get_posts(
                 array(
