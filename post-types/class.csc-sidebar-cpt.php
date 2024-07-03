@@ -16,8 +16,9 @@ if( !class_exists('CSC_Sidebar_Post_Type')){
                     'label' => esc_html__( 'Sidebar', 'csc-sidebar' ),
                     'description'   => esc_html__( 'Sidebar', 'csc-sidebar' ),
                     'labels' => array(
-                        'name'  => esc_html__( 'Sidebar', 'csc-sidebar' ),
+                        'name'  => esc_html__( 'CSC Sidebar', 'csc-sidebar' ),
                         'singular_name' => esc_html__( 'Sidebar', 'csc-sidebar' ),
+                        'menu_name'     => esc_html__( 'CSC Sidebar', 'csc-sidebar' ),
                     ),
                     'public'    => true,
                     'supports'  => array( 'title', 'author', 'editor', 'thumbnail' ),
