@@ -3,7 +3,7 @@
 /**
 * Plugin Name: CSC Sidebar
 * Plugin URI: https://www.wordpress.org/csc-sidebar
-* Description: A customizable sidebar for your WordPress theme
+* Description: A customizable sidebar for multiple authors for your WordPress theme
 * Version: 1.0
 * Requires at least: 5.6
 * Requires PHP: 7.0
@@ -36,7 +36,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 if( !class_exists( 'CSC_Sidebar' ) ){
 
     class CSC_Sidebar{
-        // public $author_email = '';
 
         public function __construct() {
 
@@ -49,7 +48,9 @@ if( !class_exists( 'CSC_Sidebar' ) ){
             require_once( CSC_SIDEBAR_PATH . 'widgets/class.csc-sidebar-widget.php' );
             $CSCSidebarWidget = new CSC_Sidebar_Widget();
 
-            add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
+            if( is_active_widget( false, false, $this->id_base ) );
+
+            // add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
 
         }
 
@@ -62,29 +63,6 @@ if( !class_exists( 'CSC_Sidebar' ) ){
             define ( 'CSC_SIDEBAR_URL', plugin_dir_url( __FILE__ ) );
             define ( 'CSC_SIDEBAR_VERSION', '1.0.0' );     
         }
-
-        // public function set_author_email() {
-        //     global $post;
-        //     $this->author_email = get_the_author_meta('user_email', $post->post_author);
-        // }
-
-         /**
-         * Enqueue scripts and pass PHP variables to JavaScript
-         */
-        public function enqueue_scripts() {
-            wp_enqueue_style('csc-sidebar-frontend', CSC_SIDEBAR_URL . 'assets/css/frontend.css', array(), CSC_SIDEBAR_VERSION, 'all');
-            // $this->set_author_email();
-
-            // wp_enqueue_script('social-icons-handler', CSC_SIDEBAR_URL . 'assets/social-icons-handler.js', array(), CSC_SIDEBAR_VERSION, true);
-        
-            // $author_email_hash = hash('sha256', $this->author_email); 
-        
-            // Localize the script with your data
-            // wp_localize_script('social-icons-handler', 'cscSidebarData', array(
-            //     'authorEmailHash' => $author_email_hash,
-            // ));
-        }
-
 
         /**
          * Activate the plugin

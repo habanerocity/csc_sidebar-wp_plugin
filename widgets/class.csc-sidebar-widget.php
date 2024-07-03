@@ -3,7 +3,7 @@
 class CSC_Sidebar_Widget extends WP_Widget{
     public function __construct(){
         $widget_options = array(
-            'description' => __( 'Your favorite customizable sidebar', 'csc-sidebar' )
+            'description' => __( 'Your favorite customizable sidebar for a blog with multiple authors', 'csc-sidebar' )
         );
 
         parent::__construct(
@@ -19,6 +19,15 @@ class CSC_Sidebar_Widget extends WP_Widget{
                 );
             } 
         );
+
+        if( is_active_widget( false, false, $this->id_base ) ){
+             add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
+        }
+    }
+
+     
+    public function enqueue_scripts() {
+        wp_enqueue_style('csc-sidebar-style-css', CSC_SIDEBAR_URL . 'assets/css/frontend.css', array(), CSC_SIDEBAR_VERSION, 'all');
     }
 
     public function form( $instance ){
