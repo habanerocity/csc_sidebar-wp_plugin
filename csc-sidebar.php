@@ -72,6 +72,7 @@ if( !class_exists( 'CSC_Sidebar' ) ){
          * Enqueue scripts and pass PHP variables to JavaScript
          */
         public function enqueue_scripts() {
+            wp_enqueue_style('csc-sidebar-frontend', CSC_SIDEBAR_URL . 'assets/css/frontend.css', array(), CSC_SIDEBAR_VERSION, 'all');
             // $this->set_author_email();
 
             // wp_enqueue_script('social-icons-handler', CSC_SIDEBAR_URL . 'assets/social-icons-handler.js', array(), CSC_SIDEBAR_VERSION, true);

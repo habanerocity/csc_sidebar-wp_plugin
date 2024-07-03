@@ -40,7 +40,7 @@ if( !class_exists('CSC_Sidebar_Post_Type')){
         public function add_meta_boxes(){
             add_meta_box(
                 'csc_sidebar_meta_box',
-                esc_html__( 'Sidebar Options', 'csc-sidebar' ),
+                esc_html__( 'CSC Sidebar Options', 'csc-sidebar' ),
                 array( $this, 'add_inner_meta_boxes' ),
                 'csc-sidebar',
                 'normal',

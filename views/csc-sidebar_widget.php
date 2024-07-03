@@ -32,7 +32,6 @@
             $user_website_link_url = get_post_meta( get_the_ID(), 'csc_sidebar_user_website_link', true );
             $user_paypal_link_url = get_post_meta( get_the_ID(), 'csc_sidebar_user_paypal_link', true );
 
-            var_dump($display_post_archive);
         ?>
 
 <div class="author-gravatar">
