@@ -5,6 +5,16 @@
     border-radius: 0 0 3px 3px;
 }
 
+.author-bio p{
+    margin:0;
+}
+
+.author-gravatar {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
 .author-gravatar > img {
     width: 100%;
 }
@@ -25,6 +35,14 @@
 
 .author-metadata ul {
     padding: 0;
+}
+
+.author-website{
+    font-size: 1.6rem;
+}
+
+.blog-sidebar-section {
+    width: 100%;
 }
 
 .flex_container {
@@ -50,10 +68,50 @@
 .csc_sidebar-heading {
     background-color: #252525;
     color: #ffffff;
+    border-radius: 3px 3px 0px 0px;
+}
+
+.thumbnail{
+    margin-top: 2rem;
 }
 
 .thumbnail-container {
     position: relative;
+}
+
+.thumbnail-container .thumb__overlay {
+    position: absolute;
+    bottom: 6%;
+    left: 0;
+    width: 100%;
+    height: auto;
+    background: rgba(245, 245, 245, 0.916);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+}
+
+.thumbnail-container .thumb__overlay h3 {
+    color: #252525;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.6rem;
+}
+
+.thumbnail-container img {
+    width: 100%;
+    height: auto;
+}
+
+.sidebar {
+    width: 23%;
+    margin-left: 11rem;
+}
+
+.sidebar-social_media_icons > li > a:visited {
+    color: #252525;
 }
 
 #about__me-heading {
@@ -81,14 +139,52 @@
     box-sizing: border-box;
 }
 
-@media (max-width: 767px) {
-    #featured_post_thumbnails-sidebar {
-        padding: 0 2rem 2rem 2rem;
-    }
+#select__categories-sidebar > select, #archive-sidebar > select {
+    width: 100%;
+    background: transparent;
+    border: 1px solid #ffffff;
+    border-radius: 3px;
+    color: #ffffff;
+    padding: 5px;
+    box-sizing: border-box;
 }
 
 @media (max-width: 1200px) {
     #featured_post_thumbnails-sidebar {
         padding: 0 1rem 2rem 1rem;
+    }
+
+    .sidebar {
+        width: 29%;
+        margin-left: 3rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .sidebar {
+        width: 100%;
+        margin: 2rem 0 0 0 !important;
+    }
+
+    .thumbnail-container .thumb__overlay {
+        height: auto;
+    }
+
+    .thumbnail-container .thumb__overlay h3 {
+        font-size: 1.6rem;
+    }
+
+    #featured_post_thumbnails-sidebar {
+        padding: 0 2rem 2rem 2rem;
+    }
+}
+
+@media (max-width: 575px) {
+    .sidebar {
+        margin-bottom: 3.2rem !important;
+    }
+
+    .sidebar-social_media_icons > li {
+        font-size: 2.6rem;
     }
 }
