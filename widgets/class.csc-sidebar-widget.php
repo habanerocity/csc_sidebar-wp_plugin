@@ -43,6 +43,7 @@ class CSC_Sidebar_Widget extends WP_Widget{
         $user_linkedin_link =  isset( $instance['user_linkedin_link'] )  ? (bool) $instance['user_linkedin_link'] : false;
         $user_github_link =  isset( $instance['user_github_link'] )  ? (bool) $instance['user_github_link'] : false;
         $user_paypal_link =  isset( $instance['user_paypal_link'] )  ? (bool) $instance['user_paypal_link'] : false;
+        $user_paypal_donation_link = isset( $instance['user_paypal_donation_link'] ) ? (bool) $instance['user_paypal_donation_link'] : false;
         
         $display_latest_posts = isset( $instance['display_latest_posts'] ) ? (bool) $instance['display_latest_posts'] : false;
         $latest_posts_number = isset( $instance['latest_posts_number'] ) ? (int) $instance['latest_posts_number'] : 3;
@@ -135,6 +136,16 @@ class CSC_Sidebar_Widget extends WP_Widget{
                 <label for="<?php echo $this->get_field_id( 'user_paypal_link' ); ?>"><?php esc_html_e( 'Display user paypal link', 'csc-sidebar' ); ?></label>
             </p>
 
+            <h4>Author's Paypal Donation Link</h4>
+
+            <p>
+                <input type="checkbox" class="checkbox"
+                id="<?php echo $this->get_field_id( 'user_paypal_donation_link' ); ?>"
+                name="<?php echo $this->get_field_name( 'user_paypal_donation_link' ); ?>"
+                <?php checked( $user_paypal_donation_link ) ?>>
+                <label for="<?php echo $this->get_field_id( 'user_paypal_donation_link' ); ?>"><?php esc_html_e( 'Display user paypal donation link', 'csc-sidebar' ); ?></label>
+            </p>
+
             <h4>Author's latest posts</h4>
 
             <p>
@@ -184,6 +195,7 @@ class CSC_Sidebar_Widget extends WP_Widget{
         $user_linkedin_link = isset( $instance['user_linkedin_link'] ) ? $instance['user_linkedin_link'] : false;
         $user_github_link = isset( $instance['user_github_link'] ) ? $instance['user_github_link'] : false;
         $user_paypal_link = isset( $instance['user_paypal_link'] ) ? $instance['user_paypal_link'] : false;
+        $user_paypal_donation_link = isset( $instance['user_paypal_donation_link'] ) ? $instance['user_paypal_donation_link'] : false;
 
         $display_latest_posts = isset( $instance['display_latest_posts'] ) ? $instance['display_latest_posts'] : false;
         $latest_posts_number = isset( $instance['latest_posts_number'] ) ? $instance['latest_posts_number'] : 3;
@@ -213,6 +225,7 @@ class CSC_Sidebar_Widget extends WP_Widget{
         $instance['user_linkedin_link'] = ! empty ( $new_instance['user_linkedin_link'] ) ? 1 : 0;
         $instance['user_github_link'] = ! empty ( $new_instance['user_github_link'] ) ? 1 : 0;
         $instance['user_paypal_link'] = ! empty ( $new_instance['user_paypal_link'] ) ? 1 : 0;
+        $instance['user_paypal_donation_link'] = ! empty ( $new_instance['user_paypal_donation_link'] ) ? 1 : 0;
 
         $instance['display_latest_posts'] = ! empty ( $new_instance['display_latest_posts'] ) ? 1 : 0;
         $instance['latest_posts_number'] = (int) $new_instance['latest_posts_number'];

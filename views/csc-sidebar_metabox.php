@@ -8,6 +8,7 @@ $user_tiktok_link = get_post_meta( $post->ID, 'csc_sidebar_user_tiktok_link', tr
 $user_linkedin_link = get_post_meta( $post->ID, 'csc_sidebar_user_linkedin_link', true);
 $user_github_link = get_post_meta( $post->ID, 'csc_sidebar_user_github_link', true);
 $user_paypal_link = get_post_meta( $post->ID, 'csc_sidebar_user_paypal_link', true);
+$user_paypal_donation_link = get_post_meta( $post->ID, 'csc_sidebar_user_paypal_donation_link', true);
 ?>
 <table class="form-table csc-sidebar-metabox"> 
     <input type="hidden" name="csc_sidebar_nonce" value="<?php echo wp_create_nonce( "csc_sidebar_nonce" ); ?>">
@@ -134,6 +135,20 @@ $user_paypal_link = get_post_meta( $post->ID, 'csc_sidebar_user_paypal_link', tr
                 id="csc_sidebar_user_paypal_link" 
                 class="regular-text user-url"
                 value="<?php echo( isset ( $user_paypal_link ) ) ? esc_url( $user_paypal_link ) : ''; ?>"
+            >
+        </td>
+    </tr> 
+    <tr>
+        <th>
+            <label for="csc_sidebar_user_paypal_donation_link"><?php esc_html_e( 'User Paypal Donation Link', 'csc-sidebar' ); ?></label>
+        </th>
+        <td>
+            <input 
+                type="url" 
+                name="csc_sidebar_user_paypal_donation_link" 
+                id="csc_sidebar_user_paypal_donation_link" 
+                class="regular-text user-url"
+                value="<?php echo( isset ( $user_paypal_donation_link ) ) ? esc_url( $user_paypal_donation_link ) : ''; ?>"
             >
         </td>
     </tr> 

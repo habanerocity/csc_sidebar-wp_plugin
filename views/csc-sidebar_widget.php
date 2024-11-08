@@ -32,6 +32,8 @@
             $user_website_link_url = get_post_meta( get_the_ID(), 'csc_sidebar_user_website_link', true );
             $user_paypal_link_url = get_post_meta( get_the_ID(), 'csc_sidebar_user_paypal_link', true );
 
+            $user_paypal_donation_link_url = get_post_meta( get_the_ID(), 'csc_sidebar_user_paypal_donation_link', true );
+
         ?>
 
 <div class="author-gravatar">
@@ -137,13 +139,35 @@
         </li>
         <?php 
         endif;
-        ?>
+        ?>   
     </ul>
+    <?php
+    if( $user_paypal_donation_link && ! empty( $user_paypal_donation_link_url ) ):
+    ?>
+    <div class="flex_container sidebar__btn-container">
+        <a class="flex_container" href="<?php echo esc_url( $user_paypal_donation_link_url ); ?>" aria-label="Author's Paypal Donation Link" target="blank">
+            <button class="btn__rectangular">Buy Me A Cup Of Coffee ☕</button>
+        </a>
+    </div>
+    <?php 
+    endif;
+    ?>  
 </div>
 <?php if($user_author_bio && ! empty( get_the_content() )): ?>
 <div class="csc_sidebar-about">
     <div class="csc_sidebar-heading">
-        <h3 class="wp-block-heading has-text-align-center" id="about__me-heading">About Me</h3>
+        <h3 
+        class="wp-block-heading has-text-align-center" 
+        <?php 
+        if( !($user_paypal_donation_link && ! empty( $user_paypal_donation_link_url )) ):
+        ?>
+        id="about__me-heading" 
+        <?php
+        endif; 
+        ?>
+        >
+        About Me
+        </h3>
     </div>
     <div class="author-bio">
         <?php the_content(); ?>
